@@ -144,7 +144,11 @@ int main()
         }
         case 3:
         {
-
+            cout << "Mostrar Lista y Pila" << endl << endl;
+            cout << "<----------------Lista---------------->" << endl;
+            printLista(ptrList);
+            cout << "<----------------Pila---------------->" << endl;
+            printPila(ptrPila);
             break;
         }
         case 4:
@@ -263,7 +267,7 @@ void printPila(ptrNodoPila ptr)
 {
     if (isEmptyPila(ptr))
     {
-        printf("La pila esta vacia");
+        printf("La pila esta vacia\n");
     }
     else
     {
