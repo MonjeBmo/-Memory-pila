@@ -28,7 +28,7 @@ typedef NodoPila *ptrNodoPila;
 void push(ptrNodoPila *ptr, char info);
 char pop(ptrNodoPila *ptr);
 int isEmptyPila(ptrNodoPila ptr);
-void printPila(ptrNodoPila *ptr);
+void printPila(ptrNodoPila ptr);
 
 // prototypes functions list
 void insert(ptrNodoList *ptrS, char valor);
@@ -36,10 +36,10 @@ int isEmptyList(ptrNodoList ptrS);
 void printLista(ptrNodoList ptrActual);
 
 // all app
-void generateData();
+void generateData(int cant, ptrNodoPila *ptrP, ptrNodoList *ptrL, bool listOrPila);
 void SubInstructions();
 void instructions();
-
+bool listOrPila(char value);
 // https://www.techiedelight.com/es/select-random-letters-in-cpp/
 // https://ccodigo.wordpress.com/2010/09/21/generar-un-string-aleatorio-en-c/
 
@@ -51,14 +51,52 @@ int main()
     int value;
     instructions();
     printf("\n Que desea realizar?");
-    scanf("%d", op);
+    scanf("%d", &op);
     while (op != 5)
     {
         switch (op)
         {
         case 1:
         {
-            
+            int c = 0;
+            char lp;
+
+            cout << endl;
+            SubInstructions();
+            cout << endl
+                 << "Ahora que desea Realizar : ";
+            cin >> lp;
+            switch (lp)
+            {
+            case 'a':
+            {
+                cout << "Ingrese la cantidad de caracteres: ";
+                cin >> c;
+                while (c >= 21)
+                {
+                    cout << endl
+                         << "Error - No mayor a 20" << endl;
+                    cout << "Ingrese la cantidad de caracteres: ";
+                    cin >> c;
+                }
+                generateData(c, &ptrPila, &ptrList, true);
+                break;
+            }
+            case 'b':
+                printPila(ptrPila);
+                cin.get();
+                break;
+            case 'c':
+                cout << "Regresando ...";
+                return 0;
+                break;
+
+            default:
+                cout << endl
+                     << "Opcion no valida!";
+                break;
+            }
+
             break;
         }
         case 2:
@@ -88,35 +126,66 @@ int main()
             break;
         }
         }
+        instructions();
+        cout << "Que desea realizar? ";
+        cin >> op;
     }
 }
 
 // functions All App
+
+bool listOrPila(char value)
+{
+    return value == 'a';
+}
+
 void generateData(int cant, ptrNodoPila *ptrP, ptrNodoList *ptrL, bool listOrPila)
 {
     char data[cant];
     // generate data
-
+    srand(time(NULL));
+    for (int i = 0; i <= cant; i++)
+    {
+        data[i] = 33 + rand() % (126 - 33);
+    }
     // save
     //  true == pila
     //  false == list
     if (listOrPila)
     {
-        for (int i = 0; i < cant; i++)
+        for (int i = 0; i <= cant; i++)
         {
+            cout << endl
+                 << "llenado pila! ...";
             push(ptrP, data[i]);
         }
     }
     else
     {
-        for (int i = 0; i < cant; i++)
+        for (int i = 0; i <= cant; i++)
         {
+            cout << endl
+                 << "llenado fila! ...";
             insert(ptrL, data[i]);
         }
     }
 }
-void SubInstructions() {}
-void instructions() {}
+void SubInstructions()
+{
+    cout << "a - Ingresar" << endl;
+    cout << "b - Mostrar" << endl;
+    cout << "c - Regresar" << endl;
+}
+void instructions()
+{
+    cout << "<-- Laboratorio #6 -->" << endl
+         << endl;
+    cout << "1 - lista" << endl;
+    cout << "2 - pila" << endl;
+    cout << "3 - Mostrar" << endl;
+    cout << "4 - Destruir" << endl;
+    cout << "5 - Salir" << endl;
+}
 
 // functions pila
 void push(ptrNodoPila *ptr, char info)
@@ -154,7 +223,7 @@ int isEmptyPila(ptrNodoPila ptr)
 
 void printPila(ptrNodoPila ptr)
 {
-    if (ptr == NULL)
+    if (isEmptyPila(ptr))
     {
         printf("La pila esta vacia");
     }
@@ -163,7 +232,7 @@ void printPila(ptrNodoPila ptr)
         printf("La pila es: \n");
         while (ptr != NULL)
         {
-            printf("| %d |\n", ptr->d);
+            cout << "| " << ptr->d << " |\n";
             ptr = ptr->ptrS;
         }
         printf("NULL\n\n");
