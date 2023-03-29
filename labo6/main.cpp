@@ -193,7 +193,7 @@ void generateData(int cant, ptrNodoPila *ptrP, ptrNodoList *ptrL, bool listOrPil
     // save
     //  true == pila
     //  false == list
-    if (listOrPila)
+    if (!listOrPila)
     {
         for (int i = 0; i <= cant; i++)
         {
