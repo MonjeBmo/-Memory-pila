@@ -101,6 +101,44 @@ int main()
         }
         case 2:
         {
+            int c = 0;
+            char lp;
+
+            cout << endl;
+            SubInstructions();
+            cout << endl
+                 << "Ahora que desea Realizar : ";
+            cin >> lp;
+            switch (lp)
+            {
+            case 'a':
+            {
+                cout << "Ingrese la cantidad de caracteres: ";
+                cin >> c;
+                while (c >= 21)
+                {
+                    cout << endl
+                         << "Error - No mayor a 20" << endl;
+                    cout << "Ingrese la cantidad de caracteres: ";
+                    cin >> c;
+                }
+                generateData(c, &ptrPila, &ptrList, false);
+                break;
+            }
+            case 'b':
+                printLista(ptrList);
+                cin.get();
+                break;
+            case 'c':
+                cout << "Regresando ...";
+                return 0;
+                break;
+
+            default:
+                cout << endl
+                     << "Opcion no valida!";
+                break;
+            }
 
             break;
         }
