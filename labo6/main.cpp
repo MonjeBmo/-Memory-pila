@@ -193,7 +193,7 @@ void generateData(int cant, ptrNodoPila *ptrP, ptrNodoList *ptrL, bool listOrPil
     srand(time(NULL));
     for (int i = 0; i <= cant; i++)
     {
-        data[i] = 33 + rand() % (126 - 33);
+        data[i] = 'a' + rand() % ('Z' - 'a' + 1);
     }
     // save
     //  true == pila
