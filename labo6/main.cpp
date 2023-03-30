@@ -29,11 +29,13 @@ void push(ptrNodoPila *ptr, char info);
 char pop(ptrNodoPila *ptr);
 int isEmptyPila(ptrNodoPila ptr);
 void printPila(ptrNodoPila ptr);
+void deletePila(ptrNodoPila *ptr);
 
 // prototypes functions list
 void insert(ptrNodoList *ptrS, char valor);
 int isEmptyList(ptrNodoList ptrS);
 void printLista(ptrNodoList ptrActual);
+void deleteList(ptrNodoList *ptr);
 
 // all app
 void generateData(int cant, ptrNodoPila *ptrP, ptrNodoList *ptrL, bool listOrPila);
@@ -144,7 +146,8 @@ int main()
         }
         case 3:
         {
-            cout << "Mostrar Lista y Pila" << endl << endl;
+            cout << "Mostrar Lista y Pila" << endl
+                 << endl;
             cout << "<----------------Lista---------------->" << endl;
             printLista(ptrList);
             cout << "<----------------Pila---------------->" << endl;
@@ -153,12 +156,14 @@ int main()
         }
         case 4:
         {
-
+            deleteList(&ptrList);
+            deletePila(&ptrPila);
+            cout << "Lista y Pila destruida." << endl;
             break;
         }
         case 5:
         {
-
+            cout << "ADIOS!!!" << endl;
             break;
         }
 
@@ -281,6 +286,21 @@ void printPila(ptrNodoPila ptr)
     }
 }
 
+void deletePila(ptrNodoPila *ptr)
+{
+    ptrNodoPila actual = *ptr;
+	ptrNodoPila siguiente;
+
+	while (actual != NULL)
+	{
+		siguiente = actual->ptrS;
+		free(actual);
+		actual = siguiente;
+	}
+
+	*ptr = NULL;
+}
+
 // functions list
 void insert(ptrNodoList *ptrS, char valor)
 {
@@ -323,7 +343,7 @@ int isEmptyList(ptrNodoList ptrS)
 
 void printLista(ptrNodoList ptrActual)
 {
-    if (ptrActual == NULL)
+    if (isEmptyList(ptrActual))
     {
         printf("La lista esta vacia.\n\n");
     }
@@ -337,4 +357,19 @@ void printLista(ptrNodoList ptrActual)
         }
         printf("NULL\n\n");
     }
+}
+
+void deleteList(ptrNodoList *ptr)
+{
+    ptrNodoList actual = *ptr;
+	ptrNodoList siguiente;
+
+	while (actual != NULL)
+	{
+		siguiente = actual->ptrS;
+		free(actual);
+		actual = siguiente;
+	}
+
+	*ptr = NULL;
 }
