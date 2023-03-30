@@ -56,6 +56,7 @@ int main()
     scanf("%d", &op);
     while (op != 5)
     {
+        system("clear");
         switch (op)
         {
         case 1:
@@ -224,7 +225,8 @@ void SubInstructions()
 }
 void instructions()
 {
-    cout << "<-- Laboratorio #6 -->" << endl
+    cout << endl
+         << "<-- Laboratorio #6 -->" << endl
          << endl;
     cout << "1 - lista" << endl;
     cout << "2 - pila" << endl;
@@ -288,16 +290,16 @@ void printPila(ptrNodoPila ptr)
 void deletePila(ptrNodoPila *ptr)
 {
     ptrNodoPila actual = *ptr;
-	ptrNodoPila siguiente;
+    ptrNodoPila siguiente;
 
-	while (actual != NULL)
-	{
-		siguiente = actual->ptrS;
-		free(actual);
-		actual = siguiente;
-	}
+    while (actual != NULL)
+    {
+        siguiente = actual->ptrS;
+        free(actual);
+        actual = siguiente;
+    }
 
-	*ptr = NULL;
+    *ptr = NULL;
 }
 
 // functions list
@@ -361,14 +363,14 @@ void printLista(ptrNodoList ptrActual)
 void deleteList(ptrNodoList *ptr)
 {
     ptrNodoList actual = *ptr;
-	ptrNodoList siguiente;
+    ptrNodoList siguiente;
 
-	while (actual != NULL)
-	{
-		siguiente = actual->ptrS;
-		free(actual);
-		actual = siguiente;
-	}
+    while (actual != NULL)
+    {
+        siguiente = actual->ptrS;
+        free(actual);
+        actual = siguiente;
+    }
 
-	*ptr = NULL;
+    *ptr = NULL;
 }
