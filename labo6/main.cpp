@@ -85,7 +85,7 @@ int main()
                 break;
             }
             case 'b':
-                printPila(ptrPila);
+                printLista(ptrList);
                 cin.get();
                 break;
             case 'c':
@@ -128,8 +128,7 @@ int main()
                 break;
             }
             case 'b':
-                printLista(ptrList);
-                cin.get();
+                printPila(ptrPila);
                 break;
             case 'c':
                 cout << "Regresando ...";
